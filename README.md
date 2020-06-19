@@ -1,0 +1,2 @@
+# dotfiles
+minefuto's dotfiles.
