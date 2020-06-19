@@ -1,0 +1,22 @@
+window:
+  dimensions:
+    columns: 160
+    lines: 50
+
+font:
+  normal:
+    family: "Cica"
+    style: Regular
+  bold:
+    family: "Cica"
+    style: Bold
+  italic:
+    family: "Cica"
+    style: Italic
+  size: 14
+
+shell:
+  program: /usr/local/bin/fish
+
+key_bindings:
+  - { key: Q, mods: Control, chars: "\x11" }

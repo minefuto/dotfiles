@@ -1,0 +1,109 @@
+ {
+  "symlinks" : {
+    "macosx" : [
+      { "src" : "~/dotfiles/nvim", "dst" : "~/.config/nvim" },
+      { "src" : "~/dotfiles/git/config", "dst" : "~/.config/git/config" },
+      { "src" : "~/dotfiles/alacritty/alacritty.yml", "dst" : "~/.config/alacritty/alacritty.yml" },
+      { "src" : "~/dotfiles/tmux/tmux.conf", "dst" : "~/.config/tmux/tmux.conf" },
+      { "src" : "~/dotfiles/fish/config.fish", "dst" : "~/.config/fish/config.fish" },
+      { "src" : "~/dotfiles/fish/fishfile", "dst" : "~/.config/fish/fishfile" },
+      { "src" : "~/dotfiles/karabiner/citrix-toggle.json", "dst" : "~/.config/karabiner/assets/complex_modifications/citrix-toggle.json" }
+    ]
+  },
+  "commands" : {
+    "macosx" : [
+      {
+        "isSkip" : "existCmd",
+        "args" : "brew",
+        "actions" : [
+          "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)\"",
+          "brew update",
+          "brew install nvim",
+          "brew install fish",
+          "brew install tmux",
+          "brew install git",
+          "brew install python3",
+          "brew install wget",
+          "brew install telnet",
+          "brew install node",
+          "brew install reattach-to-user-namespace",
+          "brew cask install appcleaner",
+          "brew cask install docker",
+          "brew cask install google-chrome",
+          "brew cask install google-japanese-ime",
+          "brew cask install slack",
+          "brew cask install zoomus",
+          "brew cask install typora",
+          "brew cask install karabiner-elements",
+          "brew cask install virtualbox",
+          "brew cask install microsoft-teams",
+          "brew cask install alacritty"
+        ]
+      },
+      {
+        "isSkip" : "existFile",
+        "args" : "~/.config/nvim/autoload/plug.vim",
+        "actions" : [
+          "curl -flo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        ]
+      },
+      {
+        "isSkip" : "existDir",
+        "args" : "~/.config/base16-shell",
+        "actions" : [
+          "git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell"
+        ]
+      },
+      {
+        "isSkip" : "existDir",
+        "args" : "~/.config/tmux/themes",
+        "actions" : [
+          "https://github.com/edouard-lopez/tmux-tomorrow.git ~/.config/tmux/themes"
+        ]
+      },
+      {
+        "isSkip" : "existFile",
+        "args" : "~/Library/Fonts/Cica-Regular.ttf",
+        "actions" : [
+          "curl -OL https://github.com/miiton/Cica/releases/download/v5.0.1/Cica_v5.0.1_with_emoji.zip",
+          "unzip Cica_v5.0.1_with_emoji.zip",
+          "mv *.ttf $HOME/Library/Fonts/",
+          "rm Cica_v5.0.1_with_emoji.zip",
+          "rm LICENSE.txt",
+          "rm COPYRIGHT.txt"
+        ]
+      },
+      {
+        "isSkip" : "exitZero",
+        "args" : "false",
+        "actions" : [
+          "scutil --set ComputerName \"minefuto\"",
+          "scutil --set HostName \"minefuto\"",
+          "scutil --set LocalHostName \"minefuto\"",
+          "defaults write NSGlobalDomain AppleShowScrollBars -string \"Always\"",
+          "defaults write -g com.apple.trackpad.scaling -int 16",
+          "defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true",
+          "defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true",
+          "defaults write -g com.apple.swipescrolldirection -bool false",
+          "defaults write NSGlobalDomain InitialKeyRepeat -int 15",
+          "defaults write -g KeyRepeat -int 2",
+          "defaults write NSGlobalDomain AppleShowAllExtensions -bool true",
+          "defaults write com.apple.dock autohide -bool true",
+          "defaults write com.apple.dock tilesize -int 35",
+          "defaults write com.apple.dock magnification -bool false",
+          "defaults write com.apple.dock show-recents -bool false",
+          "defaults write com.apple.dock orientation -string left",
+          "defaults write com.apple.dock mineffect -string scale",
+          "defaults write com.apple.dock autohide-delay -float 0",
+          "defaults write com.apple.dock AppleActionOnDoubleClick -string Minimize",
+          "defaults write com.apple.finder NewWindowTarget -string \"PfLo\"",
+          "defaults write com.apple.finder NewWindowTargetPath -string \"file://${HOME}\"",
+          "defaults write com.apple.finder ShowPathbar -bool true",
+          "defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false",
+          "defaults write com.apple.menuextra.battery ShowPercent -string \"YES\"",
+          "defaults write com.apple.menuextra.clock 'DateFormat' -string 'EEE H:mm'"
+        ]
+      }
+    ]
+  }
+}
