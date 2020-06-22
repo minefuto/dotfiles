@@ -1,3 +1,7 @@
+set XDG_CONFIG_HOME ~/.config
+set PATH /usr/local/bin $PATH
+set PATH $HOME/.nimble/bin $PATH
+
 # Fisher
 if not functions -q fisher
   set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
@@ -10,10 +14,6 @@ if status --is-interactive
     set BASE16_SHELL "$HOME/.config/base16-shell/"
     source "$BASE16_SHELL/profile_helper.fish"
 end
-
-set XDG_CONFIG_HOME ~/.config
-set PATH /usr/local/bin $PATH
-set PATH $HOME/.nimble/bin $PATH
 
 set -U EDITOR nvim
 set -U pure_symbol_prompt ">"

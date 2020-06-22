@@ -58,7 +58,7 @@
         "isSkip" : "existDir",
         "args" : "~/.config/tmux/themes",
         "actions" : [
-          "https://github.com/edouard-lopez/tmux-tomorrow.git ~/.config/tmux/themes"
+          "git clone https://github.com/edouard-lopez/tmux-tomorrow.git ~/.config/tmux/themes"
         ]
       },
       {
@@ -80,13 +80,14 @@
           "scutil --set ComputerName \"minefuto\"",
           "scutil --set HostName \"minefuto\"",
           "scutil --set LocalHostName \"minefuto\"",
+          "sudo spctl --master-disable",
           "defaults write NSGlobalDomain AppleShowScrollBars -string \"Always\"",
-          "defaults write -g com.apple.trackpad.scaling -int 16",
-          "defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true",
-          "defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true",
-          "defaults write -g com.apple.swipescrolldirection -bool false",
+          "defaults write com.apple.trackpad.scaling 3",
+          "defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick 1",
+          "defaults write com.apple.AppleMultitouchTrackpad Clicking 1",
+          "defaults write com.apple.swipescrolldirection 0",
           "defaults write NSGlobalDomain InitialKeyRepeat -int 15",
-          "defaults write -g KeyRepeat -int 2",
+          "defaults write KeyRepeat -int 2",
           "defaults write NSGlobalDomain AppleShowAllExtensions -bool true",
           "defaults write com.apple.dock autohide -bool true",
           "defaults write com.apple.dock tilesize -int 35",
@@ -95,13 +96,33 @@
           "defaults write com.apple.dock orientation -string left",
           "defaults write com.apple.dock mineffect -string scale",
           "defaults write com.apple.dock autohide-delay -float 0",
-          "defaults write com.apple.dock AppleActionOnDoubleClick -string Minimize",
           "defaults write com.apple.finder NewWindowTarget -string \"PfLo\"",
           "defaults write com.apple.finder NewWindowTargetPath -string \"file://${HOME}\"",
           "defaults write com.apple.finder ShowPathbar -bool true",
-          "defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false",
+          "defaults write NSAutomaticSpellingCorrectionEnabled -bool false",
           "defaults write com.apple.menuextra.battery ShowPercent -string \"YES\"",
           "defaults write com.apple.menuextra.clock 'DateFormat' -string 'EEE H:mm'"
+        ]
+      },
+      {
+        "isSkip" : "exitZero",
+        "args" : "false",
+        "actions" : [
+          "rm -rf ./dotprov_macOS_amd64"
+        ]
+      },
+      {
+        "isSkip" : "exitCmd",
+        "args" : "nim",
+        "actions" : [
+          "curl https://nim-lang.org/choosenim/init.sh -sSf | sh"
+        ]
+      },
+      {
+        "isSkip" : "exitCmd",
+        "args" : "false",
+        "actions" : [
+          "sh $HOME/.config/base16-shell/scripts/base16-tomorrow-night-eighties.sh"
         ]
       }
     ]
