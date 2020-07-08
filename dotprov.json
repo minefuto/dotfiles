@@ -8,6 +8,13 @@
       { "src" : "~/dotfiles/fish/config.fish", "dst" : "~/.config/fish/config.fish" },
       { "src" : "~/dotfiles/fish/fishfile", "dst" : "~/.config/fish/fishfile" },
       { "src" : "~/dotfiles/karabiner/citrix-toggle.json", "dst" : "~/.config/karabiner/assets/complex_modifications/citrix-toggle.json" }
+    ],
+    "linux" : [
+      { "src" : "~/dotfiles/nvim", "dst" : "~/.config/nvim" },
+      { "src" : "~/dotfiles/alacritty/alacritty.yml", "dst" : "~/.config/alacritty/alacritty.yml" },
+      { "src" : "~/dotfiles/tmux/tmux.conf", "dst" : "~/.config/tmux/tmux.conf" },
+      { "src" : "~/dotfiles/fish/config.fish", "dst" : "~/.config/fish/config.fish" },
+      { "src" : "~/dotfiles/fish/fishfile", "dst" : "~/.config/fish/fishfile" }
     ]
   },
   "commands" : {
@@ -109,6 +116,50 @@
         "args" : "false",
         "actions" : [
           "rm -rf ./dotprov_macOS_amd64"
+        ]
+      },
+      {
+        "isSkip" : "exitCmd",
+        "args" : "nim",
+        "actions" : [
+          "curl https://nim-lang.org/choosenim/init.sh -sSf | sh"
+        ]
+      },
+      {
+        "isSkip" : "exitCmd",
+        "args" : "false",
+        "actions" : [
+          "sh $HOME/.config/base16-shell/scripts/base16-tomorrow-night-eighties.sh"
+        ]
+      }
+    ],
+    "linux" : [
+      {
+        "isSkip" : "existFile",
+        "args" : "~/.config/nvim/autoload/plug.vim",
+        "actions" : [
+          "curl -flo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        ]
+      },
+      {
+        "isSkip" : "existDir",
+        "args" : "~/.config/base16-shell",
+        "actions" : [
+          "git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell"
+        ]
+      },
+      {
+        "isSkip" : "existDir",
+        "args" : "~/.config/tmux/themes",
+        "actions" : [
+          "git clone https://github.com/edouard-lopez/tmux-tomorrow.git ~/.config/tmux/themes"
+        ]
+      },
+      {
+        "isSkip" : "exitZero",
+        "args" : "false",
+        "actions" : [
+          "rm -rf ./dotprov_linux_amd64"
         ]
       },
       {
