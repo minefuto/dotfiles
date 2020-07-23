@@ -166,22 +166,30 @@
           "choco install -y slack",
           "choco install -y zoom",
           "choco install -y typora",
+          "choco install -y teraterm",
           "choco install -y googlechrome",
           "choco install -y googlejapaneseinput"
         ]
       },
       {
         "isSkip" : "existFile",
-        "args" : "~/vimfiles/autoload/plug.vim",
+        "args" : "~\\vimfiles\\autoload\\plug.vim",
         "actions" : [
           "curl -flo %homepath%/vimfiles/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
         ]
       },
       {
         "isSkip" : "!existFile",
-        "args" : "./dotprov_windows_amd64",
+        "args" : ".\\dotprov_windows_amd64",
         "actions" : [
-          "rm -rf ./dotprov_windows_amd64"
+          "rm -rf .\\dotprov_windows_amd64"
+        ]
+      },
+      {
+        "isSkip" : "!existFile",
+        "args" : ".\\dotprov_windows_amd64.zip",
+        "actions" : [
+          "rm -rf .\\dotprov_windows_amd64.zip"
         ]
       }
     ],
