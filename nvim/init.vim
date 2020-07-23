@@ -14,11 +14,8 @@ try
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'chriskempson/base16-vim'
   Plug 'google/vim-searchindex'
-  Plug 'hrsh7th/vim-vsnip'
-  Plug 'hrsh7th/vim-vsnip-integ'
   Plug 'machakann/vim-sandwich'
   Plug 'mattn/vim-lsp-settings'
-  Plug 'microsoft/vscode-python'
   Plug 'prabirshrestha/async.vim'
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -104,7 +101,7 @@ cnoremap <C-p> <Up>
 if has('unix')
   set shell=fish
 elseif has('win32') || has('win64')
-  set shell=bash
+  set shell=powershell
 endif
 if has('nvim')
   tnoremap <silent> <C-j> <C-\><C-n>
@@ -156,13 +153,6 @@ if empty(globpath(&rtp, 'autoload/lsp.vim')) == 0
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
   augroup END
 
-endif
-"}}}
-"Vsnip setting{{{
-if empty(globpath(&rtp, 'autoload/vsnip.vim')) == 0
-  let g:vsnip_snippet_dir = DEFAULT_DIR . "vsnip/"
-  imap <expr><C-k> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-k>'
-  smap <expr><C-k> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-k>'
 endif
 "}}}
 "Vim-fugitive setting{{{

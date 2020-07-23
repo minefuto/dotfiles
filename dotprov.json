@@ -156,6 +156,21 @@
     ],
     "windows" : [
       {
+        "isSkip" : "existCmd",
+        "args" : "choco",
+        "actions" : [
+          "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))",
+          "choco install -y git",
+          "choco install -y vim",
+          "choco install -y cica",
+          "choco install -y slack",
+          "choco install -y zoom",
+          "choco install -y typora",
+          "choco install -y googlechrome",
+          "choco install -y googlejapaneseinput"
+        ]
+      },
+      {
         "isSkip" : "existFile",
         "args" : "~/vimfiles/autoload/plug.vim",
         "actions" : [

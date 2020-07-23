@@ -6,6 +6,7 @@ if has('mac')
   set lines=50
   set guifont=Cica:h14
 elseif has('win32') || has ('win64') || has('unix')
+  colorscheme base16-tomorrow-night-eighties
   set columns=120
   set lines=50
   set guioptions-=m
