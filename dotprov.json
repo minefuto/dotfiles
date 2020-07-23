@@ -9,8 +9,15 @@
       { "src" : "~/dotfiles/fish/fishfile", "dst" : "~/.config/fish/fishfile" },
       { "src" : "~/dotfiles/karabiner/citrix-toggle.json", "dst" : "~/.config/karabiner/assets/complex_modifications/citrix-toggle.json" }
     ],
+    "windows" : [
+      { "src" : "~/dotfiles/nvim", "dst" : "~\vimfiles" },
+      { "src" : "~/dotfiles/nvim/init.vim", "dst" : "~\_vimrc" },
+      { "src" : "~/dotfiles/nvim/ginit.vim", "dst" : "~\_gvimrc" },
+      { "src" : "~/dotfiles/git/config", "dst" : "~/.gitconfig" }
+    ],
     "linux" : [
       { "src" : "~/dotfiles/nvim", "dst" : "~/.config/nvim" },
+      { "src" : "~/dotfiles/git/config", "dst" : "~/.config/git/config" },
       { "src" : "~/dotfiles/alacritty/alacritty.yml", "dst" : "~/.config/alacritty/alacritty.yml" },
       { "src" : "~/dotfiles/tmux/tmux.conf", "dst" : "~/.config/tmux/tmux.conf" },
       { "src" : "~/dotfiles/fish/config.fish", "dst" : "~/.config/fish/config.fish" },
@@ -19,6 +26,13 @@
   },
   "commands" : {
     "macosx" : [
+      {
+        "isSkip" : "existCmd",
+        "args" : "git",
+        "actions" : [
+          "xcode-select --install"
+        ]
+      },
       {
         "isSkip" : "existCmd",
         "args" : "brew",
@@ -82,7 +96,7 @@
       },
       {
         "isSkip" : "exitZero",
-        "args" : "false",
+        "args" : "test `scutil --get ComputerName` = \"minefuto\"",
         "actions" : [
           "scutil --set ComputerName \"minefuto\"",
           "scutil --set HostName \"minefuto\"",
@@ -112,28 +126,79 @@
         ]
       },
       {
-        "isSkip" : "exitZero",
-        "args" : "false",
+        "isSkip" : "!existFile",
+        "args" : "./dotprov_macOS_amd64",
         "actions" : [
           "rm -rf ./dotprov_macOS_amd64"
         ]
       },
       {
-        "isSkip" : "exitCmd",
+        "isSkip" : "existCmd",
         "args" : "nim",
         "actions" : [
           "curl https://nim-lang.org/choosenim/init.sh -sSf | sh"
         ]
       },
       {
-        "isSkip" : "exitCmd",
-        "args" : "false",
+        "isSkip" : "existCmd",
+        "args" : "nimlsp",
         "actions" : [
-          "sh $HOME/.config/base16-shell/scripts/base16-tomorrow-night-eighties.sh"
+          "nimble install nimlsp"
+        ]
+      },
+      {
+        "isSkip" : "existCmd",
+        "args" : "dotprov",
+        "actions" : [
+          "nimble install dotprov#@head"
+        ]
+      }
+    ],
+    "windows" : [
+      {
+        "isSkip" : "!existCmd",
+        "args" : "pacman",
+        "actions" : [
+          "sudo pacman-mirrors --getip",
+          "xdg-mime default google-chrome.desktop x-scheme-handler/https"
+        ]
+      },
+      {
+        "isSkip" : "existFile",
+        "args" : "~/vimfiles/autoload/plug.vim",
+        "actions" : [
+          "curl -flo ~/vimfiles/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        ]
+      },
+      {
+        "isSkip" : "!existFile",
+        "args" : "./dotprov_windows_amd64",
+        "actions" : [
+          "rm -rf ./dotprov_windows_amd64"
         ]
       }
     ],
     "linux" : [
+      {
+        "isSkip" : "!existCmd",
+        "args" : "pacman",
+        "actions" : [
+          "sudo pacman-mirrors --getip",
+          "sudo pacman -Syyu",
+          "sudo pacman -S xdg-user-dirs-gtk",
+          "LANG=C xdg-user-dirs-gtk-update",
+          "sudo pacman -S yay",
+          "sudo pacman -S base-devel --needed",
+          "sudo pacman -S alacritty",
+          "sudo pacman -S tmux",
+          "sudo pacman -S neovim",
+          "sudo pacman -S fish",
+          "sudo pacman -S fcitx-im fcitx-configtool fcitx-mozc fcitx-gtk2 fcitx-gtk3 fcitx-qt5",
+          "yay -S google-chrome",
+          "xdg-mime default google-chrome.desktop x-scheme-handler/http",
+          "xdg-mime default google-chrome.desktop x-scheme-handler/https"
+        ]
+      },
       {
         "isSkip" : "existFile",
         "args" : "~/.config/nvim/autoload/plug.vim",
@@ -156,24 +221,45 @@
         ]
       },
       {
-        "isSkip" : "exitZero",
-        "args" : "false",
+        "isSkip" : "existFile",
+        "args" : "~/.fonts/Cica-Regular.ttf",
+        "actions" : [
+          "curl -OL https://github.com/miiton/Cica/releases/download/v5.0.1/Cica_v5.0.1_with_emoji.zip",
+          "unzip Cica_v5.0.1_with_emoji.zip",
+          "mkdir -p ~/.fonts",
+          "mv ~/Downloads/*.ttf ~/.fonts",
+          "sudo fc-cache-fv",
+          "rm Cica_v5.0.1_with_emoji.zip",
+          "rm LICENSE.txt",
+          "rm COPYRIGHT.txt"
+        ]
+      },
+      {
+        "isSkip" : "!existFile",
+        "args" : "./dotprov_linux_amd64",
         "actions" : [
           "rm -rf ./dotprov_linux_amd64"
         ]
       },
       {
-        "isSkip" : "exitCmd",
+        "isSkip" : "existCmd",
         "args" : "nim",
         "actions" : [
           "curl https://nim-lang.org/choosenim/init.sh -sSf | sh"
         ]
       },
       {
-        "isSkip" : "exitCmd",
-        "args" : "false",
+        "isSkip" : "existCmd",
+        "args" : "nimlsp",
         "actions" : [
-          "sh $HOME/.config/base16-shell/scripts/base16-tomorrow-night-eighties.sh"
+          "nimble install nimlsp"
+        ]
+      },
+      {
+        "isSkip" : "existCmd",
+        "args" : "dotprov",
+        "actions" : [
+          "nimble install dotprov#@head"
         ]
       }
     ]
