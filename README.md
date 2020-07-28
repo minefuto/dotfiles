@@ -3,8 +3,8 @@
 macOS
 ```
 export PATH=$HOME/.nimble/bin:$PATH
-curl -L https://github.com/minefuto/dotprov/releases/download/v0.2.0/dotprov_macOS_amd64.tar.gz | tar zx
-./dotprov_macOS_amd64/dotprov setup minefuto/dotfiles
+curl -L https://github.com/minefuto/dotprov/releases/download/v0.2.0/dotprov_macos.tar.gz | tar zx
+./dotprov_macos_amd64/dotprov setup minefuto/dotfiles
 ```
 
 windows

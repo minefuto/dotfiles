@@ -105,7 +105,6 @@
           "defaults write NSGlobalDomain AppleShowScrollBars -string \"Always\"",
           "defaults write com.apple.trackpad.scaling 3",
           "defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick 1",
-          "defaults write com.apple.AppleMultitouchTrackpad Clicking 1",
           "defaults write com.apple.swipescrolldirection 0",
           "defaults write NSGlobalDomain InitialKeyRepeat -int 15",
           "defaults write KeyRepeat -int 2",
@@ -126,7 +125,7 @@
         ]
       },
       {
-        "isSkip" : "!existFile",
+        "isSkip" : "!existDir",
         "args" : "./dotprov_macOS_amd64",
         "actions" : [
           "rm -rf ./dotprov_macOS_amd64"
@@ -179,7 +178,7 @@
         ]
       },
       {
-        "isSkip" : "!existFile",
+        "isSkip" : "!existDir",
         "args" : ".\\dotprov_windows_amd64",
         "actions" : [
           "rm -rf .\\dotprov_windows_amd64"
@@ -250,7 +249,7 @@
         ]
       },
       {
-        "isSkip" : "!existFile",
+        "isSkip" : "!existDir",
         "args" : "./dotprov_linux_amd64",
         "actions" : [
           "rm -rf ./dotprov_linux_amd64"
