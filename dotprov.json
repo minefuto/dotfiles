@@ -125,10 +125,10 @@
         ]
       },
       {
-        "isSkip" : "!existDir",
-        "args" : "./dotprov_macOS_amd64",
+        "isSkip" : "!existFile",
+        "args" : "./dotprov",
         "actions" : [
-          "rm -rf ./dotprov_macOS_amd64"
+          "rm ./dotprov"
         ]
       },
       {
@@ -149,7 +149,7 @@
         "isSkip" : "existCmd",
         "args" : "dotprov",
         "actions" : [
-          "nimble install dotprov#@head"
+          "nimble install dotprov@#head"
         ]
       }
     ],
@@ -158,7 +158,7 @@
         "isSkip" : "existCmd",
         "args" : "choco",
         "actions" : [
-          "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))",
+          "powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))",
           "choco install -y git",
           "choco install -y vim",
           "choco install -y cica",
@@ -178,17 +178,17 @@
         ]
       },
       {
-        "isSkip" : "!existDir",
-        "args" : ".\\dotprov_windows_amd64",
+        "isSkip" : "!existFile",
+        "args" : ".\\dotprov.exe",
         "actions" : [
-          "rm -rf .\\dotprov_windows_amd64"
+          "del /Q .\\dotprov.exe"
         ]
       },
       {
         "isSkip" : "!existFile",
         "args" : ".\\dotprov_windows_amd64.zip",
         "actions" : [
-          "rm -rf .\\dotprov_windows_amd64.zip"
+          "rd /s /q .\\dotprov_windows_amd64.zip"
         ]
       }
     ],
@@ -273,7 +273,7 @@
         "isSkip" : "existCmd",
         "args" : "dotprov",
         "actions" : [
-          "nimble install dotprov#@head"
+          "nimble install dotprov@#head"
         ]
       }
     ]

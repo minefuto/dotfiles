@@ -16,7 +16,7 @@ font:
   size: 14
 
 shell:
-  program: /usr/bin/fish
+  program: /usr/local/bin/tmux
 
 key_bindings:
   - { key: Q, mods: Control, chars: "\x11" }
