@@ -179,16 +179,16 @@
       },
       {
         "isSkip" : "!existFile",
-        "args" : ".\\dotprov.exe",
+        "args" : ".\\dotprov_windows_amd64.zip",
         "actions" : [
-          "del /Q .\\dotprov.exe"
+          "del /Q .\\dotprov_windows_amd64.zip"
         ]
       },
       {
         "isSkip" : "!existFile",
-        "args" : ".\\dotprov_windows_amd64.zip",
+        "args" : ".\\dotprov.exe",
         "actions" : [
-          "rd /s /q .\\dotprov_windows_amd64.zip"
+          "del /Q .\\dotprov.exe"
         ]
       }
     ],

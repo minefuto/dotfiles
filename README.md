@@ -10,7 +10,7 @@ curl -L https://github.com/minefuto/dotprov/releases/download/v0.2.2/dotprov_mac
 windows(Need to install `git` command)
 ```
 set PATH=%PATH%;C:\ProgramData\chocolatey\bin
-curl -OL https://github.com/minefuto/dotprov/releases/download/v0.2.0/dotprov_windows_amd64.zip
+curl -OL https://github.com/minefuto/dotprov/releases/download/v0.2.2/dotprov_windows_amd64.zip
 powershell Expand-Archive -Path .\dotprov_windows_amd64.zip -DestinationPath .
 .\dotprov setup minefuto/dotfiles
 ```
@@ -18,6 +18,6 @@ powershell Expand-Archive -Path .\dotprov_windows_amd64.zip -DestinationPath .
 linux
 ```
 export PATH=$HOME/.nimble/bin:$PATH
-curl -L https://github.com/minefuto/dotprov/releases/download/v0.2.0/dotprov_linux_amd64.tar.gz | tar zx
+curl -L https://github.com/minefuto/dotprov/releases/download/v0.2.2/dotprov_linux_amd64.tar.gz | tar zx
 ./dotprov_linux_amd64/dotprov setup minefuto/dotfiles
 ```

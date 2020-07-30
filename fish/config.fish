@@ -1,5 +1,6 @@
 set XDG_CONFIG_HOME ~/.config
 set PATH /usr/local/bin $PATH
+set PATH $HOME/.cargo//bin $PATH
 set PATH $HOME/.nimble/bin $PATH
 
 # Fisher
