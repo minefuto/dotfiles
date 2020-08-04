@@ -1,6 +1,6 @@
 set XDG_CONFIG_HOME ~/.config
 set PATH /usr/local/bin $PATH
-set PATH $HOME/.cargo//bin $PATH
+set PATH $HOME/.cargo/env $PATH
 set PATH $HOME/.nimble/bin $PATH
 
 # Fisher
@@ -45,5 +45,4 @@ set -U fish_pager_color_description B3A06D yellow
 set -U fish_pager_color_prefix white --bold --underline
 set -U fish_pager_color_progress brwhite --background=cyan
 
-alias vi='nvim'
-alias vim='nvim'
+alias vi='vim'

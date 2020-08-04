@@ -2,6 +2,8 @@
   "symlinks" : {
     "macosx" : [
       { "src" : "~/dotfiles/nvim", "dst" : "~/.config/nvim" },
+      { "src" : "~/dotfiles/nvim", "dst" : "~/.vim" },
+      { "src" : "~/dotfiles/nvim/init.vim", "dst" : "~/.vimrc" },
       { "src" : "~/dotfiles/git/config", "dst" : "~/.config/git/config" },
       { "src" : "~/dotfiles/alacritty/alacritty.yml", "dst" : "~/.config/alacritty/alacritty.yml" },
       { "src" : "~/dotfiles/tmux/tmux.conf", "dst" : "~/.config/tmux/tmux.conf" },
@@ -17,6 +19,8 @@
     ],
     "linux" : [
       { "src" : "~/dotfiles/nvim", "dst" : "~/.config/nvim" },
+      { "src" : "~/dotfiles/nvim", "dst" : "~/.vim" },
+      { "src" : "~/dotfiles/nvim/init.vim", "dst" : "~/.vimrc" },
       { "src" : "~/dotfiles/git/config", "dst" : "~/.config/git/config" },
       { "src" : "~/dotfiles/alacritty/alacritty.yml", "dst" : "~/.config/alacritty/alacritty.yml" },
       { "src" : "~/dotfiles/tmux/tmux.conf", "dst" : "~/.config/tmux/tmux.conf" },
@@ -40,6 +44,7 @@
           "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)\"",
           "brew update",
           "brew install nvim",
+          "brew install vim",
           "brew install fish",
           "brew install tmux",
           "brew install git",
@@ -151,6 +156,21 @@
         "actions" : [
           "nimble install dotprov@#head"
         ]
+      },
+      {
+        "isSkip" : "existCmd",
+        "args" : "cargo",
+        "actions" : [
+          "curl https://sh.rustup.rs -sSf | sh"
+        ]
+      },
+      {
+        "isSkip" : "existCmd",
+        "args" : "rls",
+        "actions" : [
+          "rustup update",
+          "rustup component add rls rust-analysis rust-src"
+        ]
       }
     ],
     "windows" : [
@@ -206,6 +226,7 @@
           "sudo pacman -S alacritty",
           "sudo pacman -S tmux",
           "sudo pacman -S neovim",
+          "sudo pacman -S vim",
           "sudo pacman -S fish",
           "sudo pacman -S fcitx-im fcitx-configtool fcitx-mozc fcitx-gtk2 fcitx-gtk3 fcitx-qt5",
           "yay -S google-chrome",
@@ -241,7 +262,7 @@
           "curl -OL https://github.com/miiton/Cica/releases/download/v5.0.1/Cica_v5.0.1_with_emoji.zip",
           "unzip Cica_v5.0.1_with_emoji.zip",
           "mkdir -p ~/.fonts",
-          "mv ~/Downloads/*.ttf ~/.fonts",
+          "mv ~/*.ttf ~/.fonts",
           "sudo fc-cache-fv",
           "rm Cica_v5.0.1_with_emoji.zip",
           "rm LICENSE.txt",
@@ -274,6 +295,21 @@
         "args" : "dotprov",
         "actions" : [
           "nimble install dotprov@#head"
+        ]
+      },
+      {
+        "isSkip" : "existCmd",
+        "args" : "cargo",
+        "actions" : [
+          "curl https://sh.rustup.rs -sSf | sh"
+        ]
+      },
+      {
+        "isSkip" : "existCmd",
+        "args" : "rls",
+        "actions" : [
+          "rustup update",
+          "rustup component add rls rust-analysis rust-src"
         ]
       }
     ]
