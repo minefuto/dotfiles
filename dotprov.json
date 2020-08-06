@@ -2,6 +2,8 @@
   "symlinks" : {
     "macosx" : [
       { "src" : "~/dotfiles/nvim", "dst" : "~/.config/nvim" },
+      { "src" : "~/dotfiles/nvim", "dst" : "~/.vim" },
+      { "src" : "~/dotfiles/nvim/init.vim", "dst" : "~/.vimrc" },
       { "src" : "~/dotfiles/git/config", "dst" : "~/.config/git/config" },
       { "src" : "~/dotfiles/alacritty/alacritty.yml", "dst" : "~/.config/alacritty/alacritty.yml" },
       { "src" : "~/dotfiles/tmux/tmux.conf", "dst" : "~/.config/tmux/tmux.conf" },

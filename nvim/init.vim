@@ -13,6 +13,7 @@ try
   Plug 'ap/vim-buftabline'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'chriskempson/base16-vim'
+  Plug 'christoomey/vim-tmux-navigator'
   Plug 'google/vim-searchindex'
   Plug 'machakann/vim-sandwich'
   Plug 'mattn/vim-lsp-settings'
@@ -20,6 +21,8 @@ try
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'prabirshrestha/vim-lsp'
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
   Plug 'simeji/winresizer'
   Plug 'thinca/vim-quickrun'
   Plug 'tpope/vim-fugitive'
@@ -135,17 +138,17 @@ if empty(globpath(&rtp, 'autoload/lsp.vim')) == 0
     nmap <buffer><silent> [d <plug>(lsp-previous-diagnostic)
     inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
     inoremap <expr> <C-y> pumvisible() ? asyncomplete#close_popup() : "\<C-y>"
-    inoremap <expr> <C-e> pumvisible() ? asyncomplete#cancel_popup() : "\<C-e>"
+"    inoremap <expr> <C-e> pumvisible() ? asyncomplete#cancel_popup() : "\<C-e>"
 
-    function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~ '\s'
-    endfunction
-
-    inoremap <silent><expr> <C-n>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<C-n>" :
-      \ asyncomplete#force_refresh()
+"    function! s:check_back_space() abort
+"      let col = col('.') - 1
+"      return !col || getline('.')[col - 1]  =~ '\s'
+"    endfunction
+"
+"    inoremap <silent><expr> <C-n>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<C-n>" :
+"      \ asyncomplete#force_refresh()
   endfunction
 
   augroup lsp_install
@@ -174,6 +177,16 @@ if empty(globpath(&rtp, 'autoload/winresizer.vim')) == 0
   let g:winresizer_start_key = '<Leader>w'
 endif
 "}}}
+"Neosnippet setting{{{
+if empty(globpath(&rtp, 'autoload/neosnippet.vim')) == 0
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+endif
+"}}}
 "Base16 setting{{{
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
@@ -182,4 +195,11 @@ if filereadable(expand("~/.vimrc_background"))
   catch
   endtry
 endif
+"}}}
+"Vim-tmux-nagigater setting{{{
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-q>h :TmuxNavigateLeft<CR>
+nnoremap <silent> <C-q>j :TmuxNavigateDown<CR>
+nnoremap <silent> <C-q>k :TmuxNavigateUp<CR>
+nnoremap <silent> <C-q>l :TmuxNavigateRight<CR>
 "}}}
