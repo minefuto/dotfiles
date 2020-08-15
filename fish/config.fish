@@ -16,7 +16,7 @@ if status --is-interactive
     source "$BASE16_SHELL/profile_helper.fish"
 end
 
-set -U EDITOR nvim
+set -U EDITOR vim
 set -U pure_symbol_prompt ">"
 
 set -U fish_color_normal normal

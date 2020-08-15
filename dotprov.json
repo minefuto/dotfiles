@@ -1,9 +1,7 @@
  {
   "symlinks" : {
     "macosx" : [
-      { "src" : "~/dotfiles/nvim", "dst" : "~/.config/nvim" },
-      { "src" : "~/dotfiles/nvim", "dst" : "~/.vim" },
-      { "src" : "~/dotfiles/nvim/init.vim", "dst" : "~/.vimrc" },
+      { "src" : "~/dotfiles/vim", "dst" : "~/.vim" },
       { "src" : "~/dotfiles/git/config", "dst" : "~/.config/git/config" },
       { "src" : "~/dotfiles/alacritty/alacritty.yml", "dst" : "~/.config/alacritty/alacritty.yml" },
       { "src" : "~/dotfiles/tmux/tmux.conf", "dst" : "~/.config/tmux/tmux.conf" },
@@ -12,15 +10,13 @@
       { "src" : "~/dotfiles/karabiner/citrix-toggle.json", "dst" : "~/.config/karabiner/assets/complex_modifications/citrix-toggle.json" }
     ],
     "windows" : [
-      { "src" : "~\\dotfiles\\nvim", "dst" : "~\\vimfiles" },
-      { "src" : "~\\dotfiles\\nvim\\init.vim", "dst" : "~\\_vimrc" },
-      { "src" : "~\\dotfiles\\nvim\\ginit.vim", "dst" : "~\\_gvimrc" },
+      { "src" : "~\\dotfiles\\vim", "dst" : "~\\vimfiles" },
+      { "src" : "~\\dotfiles\\vim\\vimrc", "dst" : "~\\_vimrc" },
+      { "src" : "~\\dotfiles\\vim\\gvimrc", "dst" : "~\\_gvimrc" },
       { "src" : "~\\dotfiles\\git\\config", "dst" : "~\\.gitconfig" }
     ],
     "linux" : [
-      { "src" : "~/dotfiles/nvim", "dst" : "~/.config/nvim" },
-      { "src" : "~/dotfiles/nvim", "dst" : "~/.vim" },
-      { "src" : "~/dotfiles/nvim/init.vim", "dst" : "~/.vimrc" },
+      { "src" : "~/dotfiles/vim", "dst" : "~/.vim" },
       { "src" : "~/dotfiles/git/config", "dst" : "~/.config/git/config" },
       { "src" : "~/dotfiles/alacritty/alacritty.yml", "dst" : "~/.config/alacritty/alacritty.yml" },
       { "src" : "~/dotfiles/tmux/tmux.conf", "dst" : "~/.config/tmux/tmux.conf" },
@@ -32,18 +28,10 @@
     "macosx" : [
       {
         "isSkip" : "existCmd",
-        "args" : "git",
-        "actions" : [
-          "xcode-select --install"
-        ]
-      },
-      {
-        "isSkip" : "existCmd",
         "args" : "brew",
         "actions" : [
           "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)\"",
           "brew update",
-          "brew install nvim",
           "brew install vim",
           "brew install fish",
           "brew install tmux",
@@ -63,14 +51,16 @@
           "brew cask install karabiner-elements",
           "brew cask install virtualbox",
           "brew cask install microsoft-teams",
+          "brew cask install keycastr",
+          "brew cask install licecap",
           "brew cask install alacritty"
         ]
       },
       {
         "isSkip" : "existFile",
-        "args" : "~/.config/nvim/autoload/plug.vim",
+        "args" : "~/.vim/autoload/plug.vim",
         "actions" : [
-          "curl -flo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+          "curl -flo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
         ]
       },
       {
@@ -156,21 +146,6 @@
         "actions" : [
           "nimble install dotprov@#head"
         ]
-      },
-      {
-        "isSkip" : "existCmd",
-        "args" : "cargo",
-        "actions" : [
-          "curl https://sh.rustup.rs -sSf | sh"
-        ]
-      },
-      {
-        "isSkip" : "existCmd",
-        "args" : "rls",
-        "actions" : [
-          "rustup update",
-          "rustup component add rls rust-analysis rust-src"
-        ]
       }
     ],
     "windows" : [
@@ -225,7 +200,6 @@
           "sudo pacman -S base-devel --needed",
           "sudo pacman -S alacritty",
           "sudo pacman -S tmux",
-          "sudo pacman -S neovim",
           "sudo pacman -S vim",
           "sudo pacman -S fish",
           "sudo pacman -S fcitx-im fcitx-configtool fcitx-mozc fcitx-gtk2 fcitx-gtk3 fcitx-qt5",
@@ -236,9 +210,9 @@
       },
       {
         "isSkip" : "existFile",
-        "args" : "~/.config/nvim/autoload/plug.vim",
+        "args" : "~/.vim/autoload/plug.vim",
         "actions" : [
-          "curl -flo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+          "curl -flo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
         ]
       },
       {
@@ -295,21 +269,6 @@
         "args" : "dotprov",
         "actions" : [
           "nimble install dotprov@#head"
-        ]
-      },
-      {
-        "isSkip" : "existCmd",
-        "args" : "cargo",
-        "actions" : [
-          "curl https://sh.rustup.rs -sSf | sh"
-        ]
-      },
-      {
-        "isSkip" : "existCmd",
-        "args" : "rls",
-        "actions" : [
-          "rustup update",
-          "rustup component add rls rust-analysis rust-src"
         ]
       }
     ]

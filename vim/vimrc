@@ -138,17 +138,6 @@ if empty(globpath(&rtp, 'autoload/lsp.vim')) == 0
     nmap <buffer><silent> [d <plug>(lsp-previous-diagnostic)
     inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
     inoremap <expr> <C-y> pumvisible() ? asyncomplete#close_popup() : "\<C-y>"
-"    inoremap <expr> <C-e> pumvisible() ? asyncomplete#cancel_popup() : "\<C-e>"
-
-"    function! s:check_back_space() abort
-"      let col = col('.') - 1
-"      return !col || getline('.')[col - 1]  =~ '\s'
-"    endfunction
-"
-"    inoremap <silent><expr> <C-n>
-"      \ pumvisible() ? "\<C-n>" :
-"      \ <SID>check_back_space() ? "\<C-n>" :
-"      \ asyncomplete#force_refresh()
   endfunction
 
   augroup lsp_install
