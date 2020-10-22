@@ -10,14 +10,15 @@ endif
 "Vim-plug setting{{{
 try
   call plug#begin(DEFAULT_DIR . 'plugged/')
-  Plug 'ap/vim-buftabline'
+"  Plug 'ap/vim-buftabline'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'chriskempson/base16-vim'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'google/vim-searchindex'
+  Plug 'itchyny/lightline.vim'
   Plug 'machakann/vim-sandwich'
   Plug 'mattn/vim-lsp-settings'
-  Plug 'prabirshrestha/async.vim'
+  Plug 'mattn/vim-goimports'
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'prabirshrestha/vim-lsp'
@@ -45,7 +46,7 @@ set ambiwidth=double
 set completeopt=menuone,preview
 set splitright
 set splitbelow
-set showmode
+"set showmode
 set autoread
 set wrap
 set display=lastline
@@ -67,12 +68,13 @@ set tabstop=2
 set shiftwidth=2
 set clipboard+=unnamed,unnamedplus
 set laststatus=2
-set statusline=%F%m%y%=
-if empty(globpath(&rtp, 'autoload/fugitive.vim')) == 0
-  set statusline+=%{fugitive#statusline()}
-endif
-set statusline+=[enc=%{&fileencoding}]
-set statusline+=[low=%l/%L]
+set colorcolumn=80
+"set statusline=%F%m%y%=
+"if empty(globpath(&rtp, 'autoload/fugitive.vim')) == 0
+"  set statusline+=%{fugitive#statusline()}
+"endif
+"set statusline+=[enc=%{&fileencoding}]
+"set statusline+=[low=%l/%L]
 augroup fileset
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
@@ -187,8 +189,17 @@ endif
 "}}}
 "Vim-tmux-nagigater setting{{{
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <C-q>h :TmuxNavigateLeft<CR>
-nnoremap <silent> <C-q>j :TmuxNavigateDown<CR>
-nnoremap <silent> <C-q>k :TmuxNavigateUp<CR>
-nnoremap <silent> <C-q>l :TmuxNavigateRight<CR>
+nnoremap <silent> <C-q>h :<C-u>TmuxNavigateLeft<CR>
+nnoremap <silent> <C-q>j :<C-u>TmuxNavigateDown<CR>
+nnoremap <silent> <C-q>k :<C-u>TmuxNavigateUp<CR>
+nnoremap <silent> <C-q>l :<C-u>TmuxNavigateRight<CR>
+"}}}
+"CtrlP setting{{{
+nnoremap <silent> <Leader>b :<C-u>CtrlPBuffer<CR>
+nnoremap <silent> <Leader>l :<C-u>CtrlPLine<CR>
+"}}}
+"Lightline setting{{{
+let g:lightline = {
+      \ 'colorscheme': 'Tomorrow_Night_Eighties',
+      \ }
 "}}}
