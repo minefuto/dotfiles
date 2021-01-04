@@ -166,13 +166,6 @@ if empty(globpath(&rtp, 'autoload/neosnippet.vim')) == 0
   endif
 endif
 "}}}
-"vim-tmux-nagigater{{{
-"let g:tmux_navigator_no_mappings = 1
-"nnoremap <silent> <C-q>h :<C-u>TmuxNavigateLeft<CR>
-"nnoremap <silent> <C-q>j :<C-u>TmuxNavigateDown<CR>
-"nnoremap <silent> <C-q>k :<C-u>TmuxNavigateUp<CR>
-"nnoremap <silent> <C-q>l :<C-u>TmuxNavigateRight<CR>
-"}}}
 "ctrlp{{{
 if empty(globpath(&rtp, 'autoload/ctrlp.vim')) == 0
   let g:ctrlp_map = '<Nop>'

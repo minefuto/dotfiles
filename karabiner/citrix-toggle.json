@@ -2,7 +2,7 @@
   "title": "Citrix WorkSpace toggle",
   "rules": [
     {
-      "description": "option to Space + Ctrl",
+      "description": "IME toggle change from option to Space + Ctrl",
       "manipulators": [
         {
           "type": "basic",
@@ -13,7 +13,7 @@
           "conditions": [
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": [ "^com\\.citrix\\.XenAppViewer" ]
+              "bundle_identifiers": [ "^com\\.citrix\\.receiver.icaviewer.mac" ]
             }
           ],
           "to": [{ "key_code": "left_option" }]

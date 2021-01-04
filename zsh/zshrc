@@ -30,13 +30,21 @@ zinit light sindresorhus/pure
 
 bindkey -e
 
-autoload -Uz compinit && compinit
+autoload -Uz colors
+colors
+autoload -Uz compinit
+compinit
+
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:default' menu select=2
 
 setopt no_flow_control
+setopt share_history
 
 alias ls="ls -G"
+alias ll="ls -l"
+alias la="ls -al"
+alias vi="vim"
 
 function qcd() {
   qwertycd
