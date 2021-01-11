@@ -44,7 +44,7 @@ setopt share_history
 alias ls="ls -G"
 alias ll="ls -l"
 alias la="ls -al"
-alias vi="vim"
+alias vi="nvim"
 
 function qcd() {
   qwertycd

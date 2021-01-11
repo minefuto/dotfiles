@@ -1,0 +1,11 @@
+{
+  "diagnostic.errorSign": "×",
+  "diagnostic.warningSign": "•",
+  "languageserver": {
+    "nim": {
+      "command": "nimlsp",
+      "trace.server": "verbose",
+      "filetypes": ["nim"]
+    }
+  }
+}
