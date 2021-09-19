@@ -1,6 +1,9 @@
 /*
+/*/*
 /.**
+/*/.**
 
+!/setup.sh
 !/zshrc
 !/zshenv
 !/tmux.conf
@@ -12,4 +15,7 @@
 !/git/ignore
 !/brew/
 !/brew/Brewfile
+
 !/.gitignore
+!/README.md
+!/LICENSE

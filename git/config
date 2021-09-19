@@ -1,11 +1,7 @@
-[user]
-	name = minefuto
-	email = minefuto@gmail.com
 [diff]
 	tool = vimdiff
 [core]
 	editor = vim
-	excludesFile = ~/.gitignore_global
 [difftool]
 	prompt = false
 [merge]
