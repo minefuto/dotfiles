@@ -21,12 +21,21 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-zinit load zsh-users/zsh-completions
+zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 zinit light zdharma/history-search-multi-word
+
 zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 zinit light sindresorhus/pure
+
+zinit light chrissicool/zsh-256color
+BASE16_SHELL="$HOME/.zinit/plugins/chriskempson--base16-shell/"
+zinit ice atload'eval "$("$BASE16_SHELL/profile_helper.sh")"'
+zinit light chriskempson/base16-shell
+
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf
 
 bindkey -e
 
@@ -44,17 +53,25 @@ setopt share_history
 alias ls="ls -G"
 alias ll="ls -l"
 alias la="ls -al"
-alias vi="nvim"
+alias grep="grep --color=always"
+alias vi="vim"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+fi
+
+function _ssh {
+  compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
+}
 
 function qcd() {
   qwertycd
-  cd "`cat $HOME/.cache/qwertycd/cache_dir`"
+  cd "`cat $HOME/.qwertycd/cache_dir`"
 }
 
-function transparent-pipeline() {
-  BUFFER="$(tp -c "${BUFFER}|")"
+function transparent-pipe() {
+  BUFFER="$(tp -c "${BUFFER}")"
   CURSOR=$#BUFFER
 }
-zle -N transparent-pipeline
-bindkey "^|" transparent-pipeline
-
+zle -N transparent-pipe
+bindkey "^|" transparent-pipe

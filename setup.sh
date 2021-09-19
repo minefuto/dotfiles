@@ -38,22 +38,24 @@ setup_dotfiles() {
     exit 1
   fi
   git clone https://github.com/minefuto/dotfiles.git ~/dotfiles
-}
 
-setup_alacritty() {
-  title "Setup Alacritty"
-  task "Creating symlink(alacritty.yml)"
-  ln -s ~/dotfiles/alacritty/alacritty.yml ~/.alacritty.yml
-}
+  task "Creating symlink(~/.config/nvim)."
+  ln -s ~/dotfiles/nvim ~/.config/nvim
 
-setup_karabiner() {
-  title "Setup Karabiner"
-  if [ ! -d "~/.config/karabiner/asserts/complex_modifications" ]; then
-    task "Creating ~/.config/karabiner/asserts/complex_modifications."
-    mkdir -p ~/.config/karabiner/assets/complex_modifications
-  fi
-  task "Creating symlink(citrix-toggle.json)."
-  ln -s ~/dotfiles/karabiner/citrix-toggle.json ~/.config/karabiner/assets/complex_modifications/citrix-toggle.json
+  task "Creating symlink(.tmux.conf)."
+  ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
+
+  task "Creating symlink(.zshenv)."
+  ln -s ~/dotfiles/zsh/zshenv ~/.zshenv
+
+  task "Creating symlink(.zshrc)."
+  ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
+
+  task "Creating symlink(.gitconfig)."
+  ln -s ~/dotfiles/git/gitconfig ~/.gitconfig
+
+  task "Creating symlink(.gitignore_global)."
+  ln -s ~/dotfiles/git/gitignore_global ~/.gitignore_global
 }
 
 setup_nim() {
@@ -76,48 +78,15 @@ setup_go() {
   go get golang.org/x/tools/cmd/goimports
 }
 
-setup_fonts() {
-  title "Setup Powerline Fonts"
-  task "Downloading powerline fonts."
-  git clone https://github.com/powerline/fonts.git ~/fonts
-  
-  task "Installing powerline fonts."
-  ~/fonts/install.sh
-
-  task "Removing ~/fonts."
-  rm -rf ~/fonts
-}
-
 setup_nvim() {
   title "Setup NeoVim"
-  task "Creating symlink(~/.config/nvim)."
-  ln -s ~/dotfiles/nvim ~/.config/nvim
-
   task "Downloading vim-plug."
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
 	         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 }
 
-setup_tmux() {
-  title "Setup Tmux"
-  task "Creating symlink(.vim)."
-  ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
-
-  task "Downloading tpm."
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-  task "Install powerline-status."
-  pip3 install powerline-status
-}
-
 setup_zsh() {
   title "Setup Zsh"
-  task "Creating symlink(.zshenv)."
-  ln -s ~/dotfiles/zsh/zshenv ~/.zshenv
-
-  task "Creating symlink(.zshrc)."
-  ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
-
   task "Creating ~/.zinit."
   mkdir ~/.zinit
 
@@ -129,15 +98,6 @@ setup_zsh() {
 
   task "Changing permission(/usr/local/share/zsh/site-functions)."
   chmod 775 /usr/local/share/zsh/site-functions
-}
-
-setup_git() {
-  title "Setup Git"
-  task "Creating symlink(.gitconfig)."
-  ln -s ~/dotfiles/git/gitconfig ~/.gitconfig
-
-  task "Creating symlink(.gitignore_global)."
-  ln -s ~/dotfiles/git/gitignore_global ~/.gitignore_global
 }
 
 setup_mac() {
@@ -164,19 +124,25 @@ setup_mac() {
   defaults write NSAutomaticSpellingCorrectionEnabled -bool false
   defaults write com.apple.menuextra.battery ShowPercent -string "YES"
   defaults write com.apple.menuextra.clock 'DateFormat' -string 'EEE H:mm'
+
+  TERM_PROFILE='OneHalfLight_minefuto';
+  TERM_PATH='./terminal/';
+  CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
+  if [ "${CURRENT_PROFILE}" != "${TERM_PROFILE}" ]; then
+      open "$TERM_PATH$TERM_PROFILE.terminal"
+      defaults write com.apple.Terminal "Default Window Settings" -string "$TERM_PROFILE"
+      defaults write com.apple.Terminal "Startup Window Settings" -string "$TERM_PROFILE"
+  fi
+  defaults import com.apple.Terminal "$HOME/Library/Preferences/com.apple.Terminal.plist"
 }
 
 setup_homebrew
+setup_mac
+
 setup_dotfiles
-setup_alacritty
-setup_karabiner
 setup_nim
 setup_go
-setup_fonts
 setup_nvim
-setup_tmux
 setup_zsh
-setup_git
-setup_mac
 
 title "Complate"

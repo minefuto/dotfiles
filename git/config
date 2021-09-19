@@ -5,7 +5,7 @@
 	tool = vimdiff
 [core]
 	editor = vim
-	excludesFile = $HOME/.gitignore_global
+	excludesFile = ~/.gitignore_global
 [difftool]
 	prompt = false
 [merge]

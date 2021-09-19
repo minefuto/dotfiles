@@ -1,0 +1,185 @@
+"vim-plug{{{
+try
+  call plug#begin('~/.vim/plugged')
+
+"language server
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'mattn/vim-lsp-settings'
+
+"color & syntax
+  Plug 'chriskempson/base16-vim'
+  Plug 'sheerun/vim-polyglot'
+
+"fuzzy search
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'mattn/ctrlp-matchfuzzy'
+
+"git
+  Plug 'tpope/vim-fugitive'
+
+"snippet
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
+
+"etc
+  Plug 'cohama/lexima.vim'
+  Plug 'machakann/vim-sandwich'
+  Plug 'simeji/winresizer'
+
+"go
+  Plug 'mattn/vim-goimports'
+
+"nim
+  Plug 'zah/nim.vim'
+
+  call plug#end()
+catch
+endtry
+"}}}
+"colorscheme{{{
+syntax on
+if filereadable(expand("$HOME/.vimrc_background"))
+  let base16colorspace=256
+  try
+    source ~/.vimrc_background
+  catch
+  endtry
+endif
+"}}}
+"general{{{
+filetype plugin indent on
+let g:mapleader = "\<Space>"
+set number
+set shortmess+=c
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,cp932,euc-jp,sjis
+set fileformat=unix
+set belloff=all
+set completeopt=menuone,preview
+set splitright
+set splitbelow
+set autoread
+set wrap
+set display=lastline
+set wildmenu
+set hidden
+set noswapfile
+set nobackup
+set nowritebackup
+set incsearch
+set ignorecase
+set smartcase
+set shortmess+=c
+set signcolumn=yes
+set hlsearch
+set wrapscan
+set write
+set modifiable
+set backspace=indent,eol,start
+set expandtab
+set updatetime=300
+set tabstop=2
+set shiftwidth=2
+set clipboard+=unnamed,unnamedplus
+set laststatus=2
+set undofile
+if !isdirectory(expand("$HOME/.vimundo"))
+  call mkdir(expand("$HOME/.vimundo"), "p")
+endif
+set undodir=$HOME/.vimundo
+"}}}
+"keymap{{{
+nnoremap [b :<C-u>bp<CR>
+nnoremap ]b :<C-u>bn<CR>
+nnoremap [q :<C-u>cp<CR>
+nnoremap [q :<C-u>cn<CR>
+noremap <silent> j gj
+noremap <silent> gj j
+noremap <silent> k gk
+noremap <silent> gk k
+nnoremap <silent> <esc><esc> :<C-u>nohlsearch<CR>
+nnoremap x "_x
+nnoremap Q q
+nnoremap <C-q> <Nop>
+nnoremap M m
+vnoremap * "zy:let @/ = @z<CR>n
+cnoremap <C-a> <Home>
+cnoremap <C-b> <Left>
+cnoremap <C-d> <Del>
+cnoremap <C-e> <End>
+cnoremap <C-f> <Right>
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
+"}}}
+"filetype{{{
+augroup fileset
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd FileType go setlocal sw=4 ts=4 sts=4 noexpandtab
+  autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+  autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+augroup END
+"}}}
+"vim-lsp{{{
+if empty(globpath(&rtp, 'autoload/lsp.vim')) == 0
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:lsp_preview_max_height = 10
+
+  function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    inoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    inoremap <buffer> <expr><c-d> lsp#scroll(-4)
+    inoremap <expr> <C-y> pumvisible() ? asyncomplete#close_popup() : "\<C-y>"
+
+    let g:lsp_format_sync_timeout = 1000
+  endfunction
+
+  augroup lsp_install
+    autocmd!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  augroup END
+
+  let g:lsp_settings = {
+  \  'pyls-all': {
+  \    'workspace_config': {
+  \      'pyls': {
+  \        'configurationSources': ['flake8'],
+  \        'plugins': {
+  \          'pycodestyle': {'enabled': v:false},
+  \          'pydocstyle': {'enabled': v:false},
+  \          'pylint': {'enabled': v:false},
+  \          'flake8': {'enabled': v:false},
+  \        }
+  \      }
+  \    }
+  \  },
+  \}
+
+endif
+"}}}
+"winresizer{{{
+if empty(globpath(&rtp, 'autoload/winresizer.vim')) == 0
+  let g:winresizer_enable = 1
+  let g:winresizer_start_key = '<leader>w'
+endif
+"}}}
+"vim-goimports{{{
+if empty(globpath(&rtp, 'autoload/goimports.vim')) == 0
+  let g:goimports_simplify = 1
+endif
+"}}}
