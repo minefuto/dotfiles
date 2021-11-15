@@ -169,7 +169,6 @@ if empty(globpath(&rtp, 'autoload/lsp.vim')) == 0
   \    }
   \  },
   \}
-
 endif
 "}}}
 "winresizer{{{
