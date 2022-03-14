@@ -22,12 +22,9 @@ zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 zinit light sindresorhus/pure
 
 zinit light chrissicool/zsh-256color
+zinit light chriskempson/base16-shell
 BASE16_SHELL="$HOME/.zinit/plugins/chriskempson--base16-shell/"
 zinit ice atload'eval "$("$BASE16_SHELL/profile_helper.sh")"'
-zinit light chriskempson/base16-shell
-
-zinit ice from"gh-r" as"program"
-zinit light junegunn/fzf
 
 bindkey -e
 
@@ -55,3 +52,5 @@ fi
 function _ssh {
   compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
 }
+
+export PATH="$HOME/.poetry/bin:$PATH"
