@@ -1,17 +1,11 @@
 "vim-plug{{{
-if has('win32') || has ('win64')
-  let data_dir = '~/vimfiles'
-elseif has('unix')
-  let data_dir = '~/.vim'
-endif
-
-if empty(glob(data_dir . '/autoload/plug.vim'))
+if empty(glob('~/.vim/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 try
-  call plug#begin(data_dir . '/plugged')
+  call plug#begin()
 
 "language server
   Plug 'prabirshrestha/vim-lsp'
@@ -31,8 +25,9 @@ try
   Plug 'tpope/vim-fugitive'
 
 "snippet
-  Plug 'Shougo/neosnippet.vim'
-  Plug 'Shougo/neosnippet-snippets'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
+  Plug 'rafamadriz/friendly-snippets'
 
 "etc
   Plug 'cohama/lexima.vim'
@@ -175,10 +170,10 @@ if empty(globpath(&rtp, 'autoload/lsp.vim')) == 0
   \        'configurationSources': ['flake8'],
   \        'plugins': {
   \          'flake8': {'enabled': 1},
-  \          'mccabe': {'enabled': 1},
-  \          'pycodestyle': {'enabled': 1},
+  \          'mccabe': {'enabled': 0},
+  \          'pycodestyle': {'enabled': 0},
   \          'pydocstyle': {'enabled': 0},
-  \          'pyflakes': {'enabled': 1},
+  \          'pyflakes': {'enabled': 0},
   \          'pylint': {'enabled': 0},
   \        }
   \      }
@@ -199,5 +194,31 @@ if empty(globpath(&rtp, 'autoload/goimports.vim')) == 0
 endif
 "}}}
 "vim-quickrun{{{
-silent! nmap <Leader>r <Plug>(quickrun)
+if empty(globpath(&rtp, 'autoload/quickrun.vim')) == 0
+  silent! nmap <Leader>r <Plug>(quickrun)
+endif
+"}}}
+"vim-vsnip{{{
+if empty(globpath(&rtp, 'autoload/vsnip.vim')) == 0
+  " Expand
+  imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+  smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+  " Expand or jump
+  imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+  smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+  " Jump forward or backward
+  imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+  smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+  imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+  smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+  " Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+  " See https://github.com/hrsh7th/vim-vsnip/pull/50
+  nmap        s   <Plug>(vsnip-select-text)
+  xmap        s   <Plug>(vsnip-select-text)
+  nmap        S   <Plug>(vsnip-cut-text)
+  xmap        S   <Plug>(vsnip-cut-text)
+endif
 "}}}

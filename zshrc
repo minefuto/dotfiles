@@ -54,3 +54,10 @@ function _ssh {
 }
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+if [ -n "$WSL_DISTRO_NAME" ]; then
+  if command -v keychain 1>/dev/null 2>&1; then
+    /usr/bin/keychain -q --nogui $HOME/.ssh/id_rsa
+    source $HOME/.keychain/$HOST-sh
+  fi
+fi
